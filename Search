@@ -1,0 +1,50 @@
+import React , {useState} from 'react';
+import { Link, useNavigate } from "react-router-dom";
+const books= 
+[
+    "Harry Potter",
+    "The fault in our stars",
+    "Diary Of a wimpy kid",
+    "Papper Towns",
+    "Bridgerton"
+]
+const Search = () => {
+   const [searchValue , setSearchValue] = useState("")
+   
+    const handleInputChange = (event) =>{
+    setSearchValue(event.target.value);}
+
+    let navigate = useNavigate();
+
+        const filteredBooks = books.filter((book) =>
+        {
+             return book.includes(searchValue)
+        })
+
+         const AddToWhishList =(book) =>
+         {
+            navigate('/wishlist')
+            return <h1>book.value</h1>
+        }
+
+     return (
+        <div>
+        <input  type="text" value={searchValue} 
+         onChange={handleInputChange} maxLength="20"
+       />
+        <button>Search</button>
+        
+        <ul>
+   
+                {filteredBooks.map((book) => {
+                    return (<li key={book}>
+                        {book}<button onClick={AddToWhishList}>Add to WhishList</button></li>)
+
+                })}
+            </ul>
+    </div>
+    )
+            }  
+
+ 
+export default Search;
